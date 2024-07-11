@@ -1,6 +1,6 @@
 #include <iostream>
-#include "classes/print/welcome.cpp"
-#include "classes/player/player.cpp"
+#include "classes/print/welcome.h"
+#include "classes/main/menu.h"
 using namespace std;
 
 int main()
@@ -8,10 +8,8 @@ int main()
     Welcome welcome;
     welcome.printWelcome();
 
-    Player player;
-    player.listPlayers();
-
-    player.registerPlayer();
+    MenuSelection menu;
+    menu.mainMenuSelection();
 
     return 0;
 }
