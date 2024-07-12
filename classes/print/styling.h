@@ -7,7 +7,7 @@ class Styling
 public:
     void styling()
     {
-        cout << "Styling..." << endl;
+        cout << "Styling......" << endl;
     }
 
     void printHeading(string msg)
