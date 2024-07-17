@@ -3,6 +3,8 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
+#include <limits>
 #pragma once
 #include "../../struct/struct.h"
 

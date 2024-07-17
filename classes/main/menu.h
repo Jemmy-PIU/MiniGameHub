@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <limits>
 #include "../player/player.h"
 #include "../game/klaklok-dice/game.h"
 

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <limits>
+#include <algorithm>
 #include "player.h"
 #include "../../print/styling.h"
 #include "../../player/player.h"
@@ -39,8 +41,8 @@ public:
             // Check if input is valid
             if (cin.fail())
             {
-                cin.clear();                                         // clear the error flag
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Invalid input! Please enter a number." << endl;
             }
             else if (numPlayers < 2 || numPlayers > 4)
