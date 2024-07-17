@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "../player/player.h"
+#include "../game/klaklok-dice/game.h"
 
 using namespace std;
 
@@ -127,11 +128,35 @@ public:
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 isMenuRunning = false;
 
+                // Game Objects
+                StartKlaKlokGame klaklokGame;
+                bool isKlaKlokGameRunning = false;
+
                 // Switch case and break out of While loop
                 switch (choice)
                 {
                 case 1:
-                    cout << "KlaKlok Dice V1 (2-4 Players)" << endl;
+                    isKlaKlokGameRunning = true;
+                    while (isKlaKlokGameRunning)
+                    {
+                        klaklokGame.startGame();
+
+                        vector<PlayerGameResultData> resultDat = klaklokGame.getPlayerGameData();
+
+                        // Update player data in file
+                        for (int i = 0; i < resultDat.size(); i++)
+                        {
+                            player.updatePlayerBalance(resultDat[i].id, resultDat[i].initialBalance, resultDat[i].finalBalance);
+                            player.updatePlayerGameStats(resultDat[i].id, resultDat[i].gameStatus);
+                        }
+
+                        // Write game results to file
+                        player.updateDataFile();
+
+                        // Exit game and return to main menu
+                        isKlaKlokGameRunning = false;
+                        isMenuRunning = true;
+                    }
                     break;
                 case 2:
                     cout << "Tic Tac Toe (2 Players)" << endl;

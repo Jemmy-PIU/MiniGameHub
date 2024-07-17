@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#pragma once
 #include "../../struct/struct.h"
 
 using namespace std;
@@ -64,6 +65,20 @@ public:
         }
 
         return PlayerData();
+    }
+
+    // Get player position by ID using pointer
+    PlayerData *getPlayerByIdPointer(int id)
+    {
+        for (int i = 0; i < players.size(); i++)
+        {
+            if (players[i].id == id)
+            {
+                return &players[i];
+            }
+        }
+
+        return nullptr;
     }
 
     // Check if name exists
@@ -420,6 +435,39 @@ public:
                 }
             }
         }
+    }
+
+    // Update player balance after game
+    void updatePlayerBalance(int playerID, double initialAmount, double finalAmount)
+    {
+        PlayerData *thatPlayer = getPlayerByIdPointer(playerID);
+
+        // using pointer to update player balance
+        if (thatPlayer != nullptr)
+        {
+            thatPlayer->balance = thatPlayer->balance + finalAmount - initialAmount;
+        }
+    }
+
+    // Update player game stats win, lose or draw
+    void updatePlayerGameStats(int playerID, string status)
+    {
+        PlayerData *thatPlayer = getPlayerByIdPointer(playerID);
+        if (status == "WIN")
+        {
+            thatPlayer->wins++;
+        }
+        else if (status == "LOSE")
+        {
+            thatPlayer->losses++;
+        }
+        else
+        {
+            thatPlayer->draws++;
+        }
+
+        // Add total games
+        thatPlayer->totalGames++;
     }
 };
 

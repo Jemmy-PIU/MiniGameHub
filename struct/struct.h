@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#pragma once
 using namespace std;
 
 struct PlayerData
@@ -8,4 +9,13 @@ struct PlayerData
     string name;
     double balance;
     int totalGames, wins, losses, draws;
+};
+
+struct PlayerGameResultData
+{
+    int id;
+    string name;
+    string gameStatus;
+    double initialBalance;
+    double finalBalance;
 };

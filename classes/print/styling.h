@@ -12,16 +12,58 @@ public:
 
     void printHeading(string msg)
     {
-        cout << endl
-             << "====[ " << msg << " ]====" << endl;
+        cout << "=========[ " << msg << " ]=========" << endl;
     }
 
-    void printFooter(string msg)
+    void printFrame(string msg)
     {
         int msgLength = msg.length();
-        string msgFooter = "======" + string(msgLength, '=') + "======";
+        string msgFooter = "===========" + string(msgLength, '=') + "===========";
         cout
-            << msgFooter << endl
-            << endl;
+            << msgFooter << endl;
+    }
+
+    void printGameTitle(string msg)
+    {
+        printFrame(msg);
+        printHeading(msg);
+        printFrame(msg);
+    }
+};
+
+class KlaKlokPrint : public Styling
+{
+public:
+    void headingMsg()
+    {
+        printGameTitle("KlaKlok V1");
+    }
+
+    void randomDiceMsg(vector<int> diceValues)
+    {
+        printHeading("KlaKlok-Dices Rolled Values");
+
+        for (int i = 0; i < diceValues.size(); i++)
+        {
+            cout << "=" + string(18, ' ') << diceValues[i] << string(18, ' ') + "=" << endl;
+        }
+
+        printFrame("KlaKlok-Dices Rolled Values");
+    }
+
+    void exitMsg()
+    {
+        printFrame("Exiting KlaKlok V1");
+        printHeading("Exiting KlaKlok V1");
+        printFrame("Exiting KlaKlok V1");
+    }
+};
+
+class TicTacToePrint : public Styling
+{
+public:
+    void headingMsg()
+    {
+        printGameTitle("Tic Tac Toe V1");
     }
 };
