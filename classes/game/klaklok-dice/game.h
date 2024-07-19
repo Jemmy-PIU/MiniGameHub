@@ -90,15 +90,24 @@ public:
                     // Check if player ID already exists
                     if (find(playerIDs.begin(), playerIDs.end(), playerData.id) != playerIDs.end())
                     {
+
                         cout << "Player " << playerData.name << " already registered! Please choose another ID!" << endl;
                     }
                     else if (playerData.id != 0)
                     {
-                        cout << "Player " << playerData.name << " is ready to play!" << endl;
-                        setStartingBalanceForSelectedPlayer(playerData);
-                        playerIDs.push_back(playerData.id);
-                        playerNames.push_back(playerData.name);
-                        validInput = true;
+                        // Check if player has enough balance
+                        if (playerData.balance <= 0)
+                        {
+                            cout << "Player " << playerData.name << " does not have enough balance to play! Please choose another ID!" << endl;
+                        }
+                        else
+                        {
+                            cout << "Player " << playerData.name << " is ready to play!" << endl;
+                            setStartingBalanceForSelectedPlayer(playerData);
+                            playerIDs.push_back(playerData.id);
+                            playerNames.push_back(playerData.name);
+                            validInput = true;
+                        }
                     }
                     else
                     {
@@ -133,9 +142,9 @@ public:
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Invalid input! Please enter a number." << endl;
             }
-            else if (startingBal < 100 || startingBal > playerDat.balance)
+            else if (startingBal < 1 || startingBal > playerDat.balance)
             {
-                cout << "Starting balance should be between 100 and " << playerDat.balance << "!" << endl;
+                cout << "Starting balance should be between 1 and " << playerDat.balance << "!" << endl;
             }
             else
             {
@@ -148,15 +157,23 @@ public:
     // Lowest Starting Balance
     void setLowestStartingBalance()
     {
-        double lowestBal = playerStartingBalance[0];
-        for (int i = 1; i < playerStartingBalance.size(); i++)
+        // double lowestBal = playerStartingBalance[0];
+        // for (int i = 1; i < playerStartingBalance.size(); i++)
+        // {
+        //     if (playerStartingBalance[i] < lowestBal)
+        //     {
+        //         lowestBal = playerStartingBalance[i];
+        //     }
+        // }
+        // this->startingBalance = lowestBal;
+
+        double avrBal = 0;
+        for (int i = 0; i < playerStartingBalance.size(); i++)
         {
-            if (playerStartingBalance[i] < lowestBal)
-            {
-                lowestBal = playerStartingBalance[i];
-            }
+            avrBal += playerStartingBalance[i];
         }
-        this->startingBalance = lowestBal;
+
+        this->startingBalance = avrBal / playerStartingBalance.size();
     };
 
     double getStartingBalance()
@@ -479,6 +496,7 @@ public:
 
         // Start the game
         cout << "Game started!" << endl;
+        cout << "Player will win if they reach $" << game.getStartingBalance() * 10 << " or only one player left." << endl;
 
         // Game loop, if a player exceeds 10 times the starting balance or only one player is left, end the game
         while (!game.isPlayerExceedsLimit() && !game.isOnePlayerLeft() && !game.isNoPlayerLeft())
