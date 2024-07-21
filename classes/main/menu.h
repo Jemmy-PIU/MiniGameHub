@@ -31,7 +31,8 @@ public:
              << "-------[ AVAILABLE GAMES ]-------" << endl;
         cout << ">> 1. KlaKlok Dice V1 (2-4 Players)" << endl;
         cout << ">> 2. Tic Tac Toe (2 Players)" << endl;
-        cout << ">> 3. Back" << endl;
+        cout << ">> 3. Rock-Paper-Scisscor (2 Players)" << endl;
+        cout << ">> 4. Back" << endl;
         cout << "---------------------------------" << endl;
     }
 };
@@ -116,7 +117,7 @@ public:
             cout << "~~~ Enter a choice: ";
             cin >> choice;
 
-            if (cin.fail() || choice < 1 || choice > 3)
+            if (cin.fail() || choice < 1 || choice > 4)
             {
                 cout << "Invalid choice. Please try again." << endl;
                 cin.clear();
@@ -163,7 +164,9 @@ public:
                     cout << "Tic Tac Toe (2 Players)" << endl;
                     break;
                 case 3:
-                    cout << "Back" << endl;
+                    cout << "Rock-Paper-Scisscor (2 Players)" << endl;
+                    break;
+                case 4:
                     mainMenuSelection();
                     break;
                 default:
