@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <limits>
+#include <algorithm>
 #pragma once
 #include "../../struct/struct.h"
 
@@ -88,7 +89,14 @@ public:
     {
         for (int i = 0; i < players.size(); i++)
         {
-            if (players[i].name == name)
+            // Convert name to lowercase for case-insensitive comparison
+            string playerName = players[i].name;
+            transform(playerName.begin(), playerName.end(), playerName.begin(), ::tolower);
+
+            string inputName = name;
+            transform(inputName.begin(), inputName.end(), inputName.begin(), ::tolower);
+
+            if (playerName == inputName)
             {
                 return true;
             }
@@ -106,7 +114,7 @@ public:
         while (!isValid)
         {
             cout << "Enter player name: ";
-            cin >> name;
+            getline(cin, name);
 
             if (cin.fail())
             {
@@ -118,9 +126,9 @@ public:
             {
                 cout << "Player name already exists. Please try again." << endl;
             }
-            else if (name.length() < 3 || name.length() > 15)
+            else if (name.length() < 3 || name.length() > 20)
             {
-                cout << "Player name must be between 3 and 15 characters. Please try again." << endl;
+                cout << "Player name must be between 3 and 20 characters. Please try again." << endl;
             }
             else
             {
@@ -227,7 +235,7 @@ public:
         while (!isValid)
         {
             cout << "Enter player name: ";
-            cin >> name;
+            getline(cin, name);
 
             // Check if input is 0
             if (name == "0")
@@ -250,7 +258,14 @@ public:
             {
                 for (int i = 0; i < players.size(); i++)
                 {
-                    if (players[i].name == name)
+                    // Convert name to lowercase for case-insensitive comparison
+                    string playerName = players[i].name;
+                    transform(playerName.begin(), playerName.end(), playerName.begin(), ::tolower);
+
+                    string inputName = name;
+                    transform(inputName.begin(), inputName.end(), inputName.begin(), ::tolower);
+
+                    if (playerName == inputName)
                     {
                         PlayerData player = players[i];
                         cout << "==========[ Player's Information ] ==========" << endl;
