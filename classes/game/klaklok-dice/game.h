@@ -434,7 +434,7 @@ public:
 
                 double amount = currentPlayer.getBetAmounts()[j] * count;
                 currentPlayer.addBalance(amount);
-                cout << "Player " << i + 1 << " guessed the number " << correctGuesses[j] << " correctly " << abbre << " and earned " << amount << endl;
+                cout << "Player #" << i + 1 << " " << currentPlayer.getName() << " guessed the number " << correctGuesses[j] << " correctly " << abbre << " and earned $" << amount << endl;
             }
         }
     }

@@ -45,7 +45,7 @@ public:
 
         for (int i = 0; i < diceValues.size(); i++)
         {
-            cout << "=" + string(18, ' ') << diceValues[i] << string(18, ' ') + "=" << endl;
+            cout << "=" + string(23, ' ') << diceValues[i] << string(23, ' ') + "=" << endl;
         }
 
         printFrame("KlaKlok-Dices Rolled Values");
