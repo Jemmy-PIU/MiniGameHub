@@ -554,6 +554,18 @@ public:
         file.close();
     }
 
+    // Update all players details from file
+    void updateAllPlayersDetails()
+    {
+        string filename = "./config/data.ini";
+
+        // remove all players from vector
+        players.clear();
+
+        // read all players from file
+        readPlayersFromFile(filename);
+    }
+
     int getPlayerId() const
     {
         return id;

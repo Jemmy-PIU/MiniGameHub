@@ -1,0 +1,6 @@
+
+Game History 1 :
+
+: Player 1: r
+| Bot: p
+| Result: Bot

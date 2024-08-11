@@ -1,4 +1,8 @@
 #include <iostream>
+#include <vector>
+#include <string>
+#include <limits>
+#pragma once
 
 using namespace std;
 
@@ -65,5 +69,11 @@ public:
     void headingMsg()
     {
         printGameTitle("Tic Tac Toe V1");
+    }
+    void exitMsg()
+    {
+        printFrame("Exiting Tic Tac Toe V1");
+        printHeading("Exiting Tic Tac Toe V1");
+        printFrame("Exiting Tic Tac Toe V1");
     }
 };

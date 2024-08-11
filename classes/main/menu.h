@@ -4,6 +4,8 @@
 #include <limits>
 #include "../player/player.h"
 #include "../game/klaklok-dice/game.h"
+#include "../game/rps/game1.h"
+#include "../game/tictactoe/tictactoe.h"
 
 using namespace std;
 
@@ -30,8 +32,8 @@ public:
         cout << endl
              << "-------[ AVAILABLE GAMES ]-------" << endl;
         cout << ">> 1. KlaKlok Dice V1 (2-4 Players)" << endl;
-        cout << ">> 2. Tic Tac Toe (2 Players)" << endl;
-        cout << ">> 3. Rock-Paper-Scisscor (2 Players)" << endl;
+        cout << ">> 2. Rock-Paper-Scisscor (2 Players)" << endl;
+        cout << ">> 3. Tic Tac Toe (2 Players)" << endl;
         cout << ">> 4. Back" << endl;
         cout << "---------------------------------" << endl;
     }
@@ -134,6 +136,12 @@ public:
                 StartKlaKlokGame klaklokGame;
                 bool isKlaKlokGameRunning = false;
 
+                StartRPS rps;
+                bool isRPSrunning = false;
+
+                TicTacToeGame tttGame;
+                bool isTttRunning = false;
+
                 // Switch case and break out of While loop
                 switch (choice)
                 {
@@ -161,10 +169,39 @@ public:
                     }
                     break;
                 case 2:
-                    cout << "Tic Tac Toe (2 Players)" << endl;
+                    isRPSrunning = true;
+                    while (isRPSrunning)
+                    {
+                        rps.startRps();
+
+                        vector<PlayerGameResultData> resultDat = rps.getPlayerGameData();
+
+                        // Update player data in file
+                        for (int i = 0; i < resultDat.size(); i++)
+                        {
+                            player.updatePlayerBalance(resultDat[i].id, resultDat[i].initialBalance, resultDat[i].finalBalance);
+                            player.updatePlayerGameStats(resultDat[i].id, resultDat[i].gameStatus);
+                        }
+
+                        // Write game results to file
+                        player.updateDataFile();
+
+                        isRPSrunning = false;
+                        isMenuRunning = true;
+                    }
                     break;
                 case 3:
-                    cout << "Rock-Paper-Scisscor (2 Players)" << endl;
+                    isTttRunning = true;
+                    while (isTttRunning)
+                    {
+                        tttGame.playGame();
+
+                        // Update players
+                        player.updateAllPlayersDetails();
+
+                        isTttRunning = false;
+                        isMenuRunning = true;
+                    }
                     break;
                 case 4:
                     mainMenuSelection();
